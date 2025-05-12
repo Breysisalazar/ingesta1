@@ -1,6 +1,7 @@
 import pandas as pd
 import pymysql
 import boto3
+print("Paso 1 completado")
 
 # Conexion a la base de datos MySQL
 conn = pymysql.connect(
@@ -10,6 +11,7 @@ conn = pymysql.connect(
     password='utec',             # Contrasena de MySQL
     database='compras_db'        # Nombre de la base de datos
 )
+print("Paso 2 completado")
 
 # Leer los datos con una consulta SQL
 query = """
@@ -20,13 +22,16 @@ JOIN Membresia m ON p.id_pasajero = m.id_pasajero
 JOIN Compra c ON p.id_pasajero = c.id_pasajero
 """
 df = pd.read_sql(query, conn)
+print("Paso 3 completado")
 
 # Cerrar la conexion
 conn.close()
+print("Paso 3 completado")
 
 # Guardar los datos como un archivo CSV
 csv_file = "compras.csv"
 df.to_csv(csv_file, index=False)
+print("Paso 4 completado")
 
 # Subir el archivo CSV a S3
 s3 = boto3.client('s3')
