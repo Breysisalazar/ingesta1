@@ -36,7 +36,6 @@ try:
     s3 = boto3.client('s3')
     s3.upload_file(csv_file, "ingesta-datos", "ingesta01/compras.csv")
     logging.info("Archivo CSV subido exitosamente a S3")
-dpx-gwsd-wgn
 
 except Exception as e:
     logging.error("Ocurrio un error durante la ejecución", exc_info=True)
